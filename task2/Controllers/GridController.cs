@@ -55,7 +55,7 @@ namespace task2.Controllers
                 book.BookId = entity.BookId;
             }
 
-            return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            return Json(new[] { book }.ToDataSourceResult(request, ModelState),JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
