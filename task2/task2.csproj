@@ -442,7 +442,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AnotherGridController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\BrochuresController.cs" />
     <Compile Include="Controllers\GridController.cs" />
@@ -460,8 +459,13 @@
     <Compile Include="LibraryContextMigrations\201802091407293_Initial.Designer.cs">
       <DependentUpon>201802091407293_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="LibraryContextMigrations\201802121253322_Second.cs" />
+    <Compile Include="LibraryContextMigrations\201802121253322_Second.Designer.cs">
+      <DependentUpon>201802121253322_Second.cs</DependentUpon>
+    </Compile>
     <Compile Include="LibraryContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Brochure.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -2988,13 +2992,13 @@
     <Content Include="Kendo\styles\kendo.silver.mobile.min.css.map" />
     <Content Include="Kendo\styles\kendo.uniform.min.css.map" />
     <Content Include="Kendo\styles\kendo.uniform.mobile.min.css.map" />
-    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
-    <Content Include="Scripts\jquery-3.0.0.js" />
-    <Content Include="Scripts\jquery-3.0.0.min.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -3072,7 +3076,7 @@
     <Content Include="Views\Brochures\Edit.cshtml" />
     <Content Include="Views\Brochures\Index.cshtml" />
     <Content Include="Views\Grid\Index.cshtml" />
-    <Content Include="Views\AnotherGrid\Index.cshtml" />
+    <Content Include="Views\Shared\_myLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3096,6 +3100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LibraryContextMigrations\201802091407293_Initial.resx">
       <DependentUpon>201802091407293_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibraryContextMigrations\201802121253322_Second.resx">
+      <DependentUpon>201802121253322_Second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

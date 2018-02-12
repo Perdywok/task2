@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace task2.Models
 {
@@ -26,6 +23,6 @@ namespace task2.Models
 
         public Genre Genre { get; set; }
 
-        public string Authors { get; set; }
+        public virtual ICollection<Author> Authors { get; set; }
     }
 }

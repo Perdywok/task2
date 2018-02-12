@@ -1,8 +1,7 @@
 namespace task2.LibraryContextMigrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Initial : DbMigration
     {
         public override void Up()
