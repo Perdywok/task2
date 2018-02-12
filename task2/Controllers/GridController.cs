@@ -4,16 +4,17 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using task2.Models;
-
+using System.ComponentModel.DataAnnotations;
 namespace task2.Controllers
 {
+    [Authorize(Roles ="admin")]
     public class GridController : Controller
     {
         private Library db = new Library();
         
         public ActionResult Index()
         {
-            return View(JsonRequestBehavior.AllowGet);
+            return View();
         }
         
         public ActionResult Books_Read([DataSourceRequest]DataSourceRequest request)

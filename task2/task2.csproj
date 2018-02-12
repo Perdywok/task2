@@ -465,6 +465,7 @@
     </Compile>
     <Compile Include="LibraryContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Brochure.cs" />
