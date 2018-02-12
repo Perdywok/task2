@@ -6,7 +6,8 @@ namespace task2.LibraryContextMigrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             MigrationsDirectory = @"LibraryContextMigrations";
             ContextKey = "task2.Models.Library";
         }

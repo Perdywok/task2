@@ -3065,11 +3065,6 @@
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
-    <Content Include="Views\Journals\Create.cshtml" />
-    <Content Include="Views\Journals\Delete.cshtml" />
-    <Content Include="Views\Journals\Details.cshtml" />
-    <Content Include="Views\Journals\Edit.cshtml" />
-    <Content Include="Views\Journals\Index.cshtml" />
     <Content Include="Views\Brochures\Create.cshtml" />
     <Content Include="Views\Brochures\Delete.cshtml" />
     <Content Include="Views\Brochures\Details.cshtml" />
@@ -3077,6 +3072,7 @@
     <Content Include="Views\Brochures\Index.cshtml" />
     <Content Include="Views\Grid\Index.cshtml" />
     <Content Include="Views\Shared\_myLayout.cshtml" />
+    <Content Include="Views\Journals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

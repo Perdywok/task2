@@ -1,7 +1,13 @@
-﻿using System.Data.Entity;
-using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using task2.Models;
 
 namespace task2.Controllers
@@ -10,113 +16,94 @@ namespace task2.Controllers
     {
         private Library db = new Library();
 
-        // GET: Journals
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.Journals.ToListAsync());
-        }
-
-        // GET: Journals/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Journal journal = await db.Journals.FindAsync(id);
-            if (journal == null)
-            {
-                return HttpNotFound();
-            }
-            return View(journal);
-        }
-
-        // GET: Journals/Create
-        public ActionResult Create()
+        public ActionResult Index()
         {
             return View();
         }
 
-        // POST: Journals/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "JournalId,BookName,Pages,Content,Genre,Authors")] Journal journal)
+        public ActionResult Journals_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            IQueryable<Journal> journals = db.Journals;
+            DataSourceResult result = journals.ToDataSourceResult(request, journal => new
+            {
+                JournalId = journal.JournalId,
+                BookName = journal.BookName,
+                Pages = journal.Pages,
+                Content = journal.Content,
+                Genre = journal.Genre
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Journals_Create([DataSourceRequest]DataSourceRequest request, Journal journal)
         {
             if (ModelState.IsValid)
             {
-                db.Journals.Add(journal);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var entity = new Journal
+                {
+                    BookName = journal.BookName,
+                    Pages = journal.Pages,
+                    Content = journal.Content,
+                    Genre = journal.Genre
+                };
+
+                db.Journals.Add(entity);
+                db.SaveChanges();
+                journal.JournalId = entity.JournalId;
             }
 
-            return View(journal);
+            return Json(new[] { journal }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Journals/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Journal journal = await db.Journals.FindAsync(id);
-            if (journal == null)
-            {
-                return HttpNotFound();
-            }
-            return View(journal);
-        }
-
-        // POST: Journals/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "JournalId,BookName,Pages,Content,Genre,Authors")] Journal journal)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Journals_Update([DataSourceRequest]DataSourceRequest request, Journal journal)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(journal).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var entity = new Journal
+                {
+                    JournalId = journal.JournalId,
+                    BookName = journal.BookName,
+                    Pages = journal.Pages,
+                    Content = journal.Content,
+                    Genre = journal.Genre
+                };
+
+                db.Journals.Attach(entity);
+                db.Entry(entity).State = EntityState.Modified;
+                db.SaveChanges();
             }
-            return View(journal);
+
+            return Json(new[] { journal }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Journals/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Journals_Destroy([DataSourceRequest]DataSourceRequest request, Journal journal)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Journal journal = await db.Journals.FindAsync(id);
-            if (journal == null)
-            {
-                return HttpNotFound();
-            }
-            return View(journal);
-        }
+                var entity = new Journal
+                {
+                    JournalId = journal.JournalId,
+                    BookName = journal.BookName,
+                    Pages = journal.Pages,
+                    Content = journal.Content,
+                    Genre = journal.Genre
+                };
 
-        // POST: Journals/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Journal journal = await db.Journals.FindAsync(id);
-            db.Journals.Remove(journal);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+                db.Journals.Attach(entity);
+                db.Journals.Remove(entity);
+                db.SaveChanges();
+            }
+
+            return Json(new[] { journal }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            db.Dispose();
             base.Dispose(disposing);
         }
     }
