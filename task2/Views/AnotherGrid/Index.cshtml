@@ -1,0 +1,17 @@
+﻿
+@(Html.Kendo().Grid<task2.Models.Book>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.BookName);
+        columns.Bound(c => c.Pages);
+        columns.Bound(c => c.Content);
+        columns.Bound(c => c.Genre);
+        columns.Bound(c => c.Authors);
+      })
+      .Scrollable(scrollable => scrollable.Enabled(false))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("Books_Read", "AnotherGrid"))
+      )
+)

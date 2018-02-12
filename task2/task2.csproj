@@ -48,9 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kendo.Mvc, Version=2016.2.616.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for ASP.NET MVC R1 2018\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
+    <Reference Include="Kendo.Mvc, Version=2015.2.902.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\FortuneLab.Kendo.Mvc.1.0.0\lib\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.1.0.0\lib\net451\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
@@ -443,6 +442,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnotherGridController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\BrochuresController.cs" />
     <Compile Include="Controllers\GridController.cs" />
@@ -485,6 +485,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Kendo.Mvc.xml" />
     <Content Include="Kendo\js\angular.min.js" />
     <Content Include="Kendo\js\cultures\kendo.culture.aa-DJ.min.js" />
     <Content Include="Kendo\js\cultures\kendo.culture.aa-ER.min.js" />
@@ -3071,6 +3072,7 @@
     <Content Include="Views\Brochures\Edit.cshtml" />
     <Content Include="Views\Brochures\Index.cshtml" />
     <Content Include="Views\Grid\Index.cshtml" />
+    <Content Include="Views\AnotherGrid\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

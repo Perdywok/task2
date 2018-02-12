@@ -15,12 +15,12 @@ namespace task2.Controllers
     public class GridController : Controller
     {
         private Library db = new Library();
-
+        
         public ActionResult Index()
         {
-            return View();
+            return View(JsonRequestBehavior.AllowGet);
         }
-
+        
         public ActionResult Books_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Book> books = db.Books;
@@ -32,8 +32,11 @@ namespace task2.Controllers
                 Genre = book.Genre,
                 Authors = book.Authors
             });
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+           // if (Request.IsAjaxRequest())
+                return Json(result, JsonRequestBehavior.AllowGet);
+            //else            
+             //   return View("Index", books);
+            
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -54,8 +57,10 @@ namespace task2.Controllers
                 db.SaveChanges();
                 book.BookId = entity.BookId;
             }
-
-            return Json(new[] { book }.ToDataSourceResult(request, ModelState),JsonRequestBehavior.AllowGet);
+            if (Request.IsAjaxRequest())
+                return Json(new[] { book }.ToDataSourceResult(request, ModelState),JsonRequestBehavior.AllowGet);
+            else
+                return View("Index");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -77,8 +82,10 @@ namespace task2.Controllers
                 db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
-            return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            if (Request.IsAjaxRequest())
+                return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            else
+                return View("Index");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -100,8 +107,10 @@ namespace task2.Controllers
                 db.Books.Remove(entity);
                 db.SaveChanges();
             }
-
-            return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            if (Request.IsAjaxRequest())
+                return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
+            else
+                return View("Index");
         }
 
         protected override void Dispose(bool disposing)
