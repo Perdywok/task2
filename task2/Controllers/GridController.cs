@@ -4,19 +4,18 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using task2.Models;
-using System.ComponentModel.DataAnnotations;
+
 namespace task2.Controllers
 {
-    [Authorize(Roles ="admin")]
     public class GridController : Controller
     {
         private Library db = new Library();
-        
+
         public ActionResult Index()
         {
             return View();
         }
-        
+
         public ActionResult Books_Read([DataSourceRequest]DataSourceRequest request)
         {
             IQueryable<Book> books = db.Books;
@@ -25,14 +24,10 @@ namespace task2.Controllers
                 BookName = book.BookName,
                 Pages = book.Pages,
                 Content = book.Content,
-                Genre = book.Genre,
-                Authors = book.Authors
+                Genre = book.Genre
             });
-           // if (Request.IsAjaxRequest())
-                return Json(result, JsonRequestBehavior.AllowGet);
-            //else            
-             //   return View("Index", books);
-            
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -45,18 +40,15 @@ namespace task2.Controllers
                     BookName = book.BookName,
                     Pages = book.Pages,
                     Content = book.Content,
-                    Genre = book.Genre,
-                    Authors = book.Authors
+                    Genre = book.Genre
                 };
 
                 db.Books.Add(entity);
                 db.SaveChanges();
                 book.BookId = entity.BookId;
             }
-            if (Request.IsAjaxRequest())
-                return Json(new[] { book }.ToDataSourceResult(request, ModelState),JsonRequestBehavior.AllowGet);
-            else
-                return View("Index");
+
+            return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -70,18 +62,15 @@ namespace task2.Controllers
                     BookName = book.BookName,
                     Pages = book.Pages,
                     Content = book.Content,
-                    Genre = book.Genre,
-                    Authors = book.Authors
+                    Genre = book.Genre
                 };
 
                 db.Books.Attach(entity);
                 db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            if (Request.IsAjaxRequest())
-                return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
-            else
-                return View("Index");
+
+            return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -95,18 +84,15 @@ namespace task2.Controllers
                     BookName = book.BookName,
                     Pages = book.Pages,
                     Content = book.Content,
-                    Genre = book.Genre,
-                    Authors = book.Authors
+                    Genre = book.Genre
                 };
 
                 db.Books.Attach(entity);
                 db.Books.Remove(entity);
                 db.SaveChanges();
             }
-            if (Request.IsAjaxRequest())
-                return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
-            else
-                return View("Index");
+
+            return Json(new[] { book }.ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

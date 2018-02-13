@@ -1,35 +1,31 @@
 ﻿@{
     Layout = "~/Views/Shared/_myLayout.cshtml";
 }
-@(Html.Kendo().Grid<task2.Models.Book>()
-          .Name("grid")
-          .Columns(columns =>
-          {
-              columns.Bound(c => c.BookName);
-              columns.Bound(c => c.Pages);
-              columns.Bound(c => c.Content);
-              columns.Bound(c => c.Genre);
-              columns.Bound(c => c.Authors);
-              columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
-          })
-          .ToolBar(toolbar =>
-          {
-              toolbar.Create();
-          })
-          .Editable(editable => editable.Mode(GridEditMode.InLine))
-          .Pageable()
-          .Sortable(sortable =>
-          {
-              sortable.SortMode(GridSortMode.MultipleColumn);
-          })
-          .Filterable()
-          .Scrollable()
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Model(model => model.Id(p => p.BookId))
-              .Read(read => read.Action("Books_Read", "Grid"))
-              .Create(create => create.Action("Books_Create", "Grid"))
-              .Update(update => update.Action("Books_Update", "Grid"))
-              .Destroy(destroy => destroy.Action("Books_Destroy", "Grid"))
-          )
-)
+
+@(Html.Kendo().Grid<task2.Models.Book>
+    ()
+    .Name("grid")
+    .Columns(columns =>
+    {
+    columns.Bound(c => c.BookName);
+    columns.Bound(c => c.Pages);
+    columns.Bound(c => c.Content);
+    columns.Bound(c => c.Genre);
+    columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+    })
+    .ToolBar(toolbar => {
+    toolbar.Create();
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Pageable()
+    .Filterable()
+    .Scrollable()
+    .DataSource(dataSource => dataSource
+    .Ajax()
+    .Model(model => model.Id(p => p.BookId))
+    .Read(read => read.Action("Books_Read", "Grid"))
+    .Create(create => create.Action("Books_Create", "Grid"))
+    .Update(update => update.Action("Books_Update", "Grid"))
+    .Destroy(destroy => destroy.Action("Books_Destroy", "Grid"))
+    )
+    )
