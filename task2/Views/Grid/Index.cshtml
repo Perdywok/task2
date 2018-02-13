@@ -3,8 +3,7 @@
 }
 @(Html.Kendo().Grid<task2.Models.Book>
     ()
-    .Name("grid")
-                             .Columns(columns =>
+    .Name("grid").Columns(columns =>
                              {
                                  columns.Bound(c => c.BookName);
                                  columns.Bound(c => c.Pages);

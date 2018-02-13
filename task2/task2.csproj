@@ -468,6 +468,7 @@
     <Compile Include="Models\AppDbInitializer.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BooksAuthorsViewModel.cs" />
     <Compile Include="Models\Brochure.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />

@@ -28,8 +28,9 @@ namespace task2.Controllers
                 Content = book.Content,
                 Genre = book.Genre
             });
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            
+           // return Json(result, JsonRequestBehavior.AllowGet);
+           return Json(db.Books.Include("Authors").ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -42,7 +43,8 @@ namespace task2.Controllers
                     BookName = book.BookName,
                     Pages = book.Pages,
                     Content = book.Content,
-                    Genre = book.Genre
+                    Genre = book.Genre,
+                    Authors = book.Authors
                 };
 
                 db.Books.Add(entity);
@@ -86,7 +88,8 @@ namespace task2.Controllers
                     BookName = book.BookName,
                     Pages = book.Pages,
                     Content = book.Content,
-                    Genre = book.Genre
+                    Genre = book.Genre,
+                    Authors = book.Authors
                 };
 
                 db.Books.Attach(entity);
