@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace task2.Models
 {
-    public class Book 
+    public class Book
     {
         public Book()
         {

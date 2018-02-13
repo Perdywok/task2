@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
@@ -6,7 +7,8 @@ using Kendo.Mvc.UI;
 using task2.Models;
 
 namespace task2.Controllers
-{
+{ 
+    [Authorize(Roles ="admin")]
     public class GridController : Controller
     {
         private Library db = new Library();
